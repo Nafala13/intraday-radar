@@ -182,6 +182,49 @@
   .score-row td:nth-child(2) { color: var(--text); }
   .dot-accent { color: var(--accent); font-weight: 700; }
 
+  /* EXCEL LOG PREVIEW CSS (NEW) */
+  .log-preview-container {
+    overflow-x: auto;
+    margin-top: 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+  }
+  .log-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-size: 11px;
+    white-space: nowrap;
+    margin-top: 0;
+  }
+  .log-table th {
+    background: var(--card);
+    color: #fff;
+    padding: 8px 16px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-transform: none;
+    letter-spacing: normal;
+    text-align: center;
+  }
+  .log-table td {
+    padding: 8px 16px;
+    border-right: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--text);
+    text-align: center;
+    vertical-align: middle;
+  }
+  .log-table td:first-child { color: var(--muted); font-weight: 400; }
+  .log-table th:last-child, .log-table td:last-child { border-right: none; }
+  
+  .row-bullish { background: rgba(0, 255, 136, 0.08); }
+  .row-bearish { background: rgba(255, 77, 77, 0.08); }
+  
+  .badge-green { background: #27AE60; color: #fff; padding: 2px 6px; border-radius: 3px; font-weight: bold; }
+  .badge-orange { background: #F39C12; color: #fff; padding: 2px 6px; border-radius: 3px; font-weight: bold; }
+
   /* PILL TAGS */
   .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
   .tag {
@@ -281,7 +324,6 @@
 </head>
 <body>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-tag">PYTHON SCRIPT — CRYPTO SIGNAL SCANNER</div>
   <h1>Intraday Radar Bot <span>v4</span></h1>
@@ -306,7 +348,6 @@
   </div>
 </div>
 
-<!-- WHAT'S INCLUDED -->
 <div class="section">
   <div class="section-title">What's included</div>
   <div class="card" style="padding: 8px 24px;">
@@ -341,7 +382,6 @@
   </div>
 </div>
 
-<!-- DATA SOURCES -->
 <div class="section">
   <div class="section-title">Data Sources</div>
   <div class="card">
@@ -358,7 +398,6 @@
   </div>
 </div>
 
-<!-- INDICATORS -->
 <div class="section">
   <div class="section-title">Technical Indicators</div>
 
@@ -408,7 +447,6 @@
   </div>
 </div>
 
-<!-- FILTERS -->
 <div class="section">
   <div class="section-title">Smart Filters</div>
 
@@ -439,7 +477,6 @@
   </div>
 </div>
 
-<!-- SCORING -->
 <div class="section">
   <div class="section-title">Scoring System — 9 Conditions</div>
   <div class="card" style="padding: 8px 16px;">
@@ -513,16 +550,116 @@
   <p style="font-size:13px; color: var(--muted); margin-top: 10px; padding-left: 4px;">Minimum score to emit a signal: <strong style="color:#fff;">5/9</strong>. Recommended entry threshold: <strong style="color: var(--accent);">7–9/9</strong>.</p>
 </div>
 
-<!-- OUTPUT -->
 <div class="section">
   <div class="section-title">Signal Output</div>
   <div class="card">
     <p>Each signal includes: <strong>Symbol · Trend · Score · Entry · Stop Loss · Take Profit · Risk% · RR Ratio · RSI · ADX · MACD Histogram · Volume Spike · Candle Type · OI Status · OI Change%</strong> — plus a full 9-condition breakdown per signal.</p>
     <p style="margin-top: 10px;">All signals are automatically appended to <code>signal_log.xlsx</code> with color-coded rows (green = bullish, red = bearish), color-coded BTC Trend and OI Status columns. Header row is frozen for easy scrolling.</p>
+    
+    <div class="log-preview-container">
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th>Datetime</th>
+            <th>BTC Trend</th>
+            <th>Symbol</th>
+            <th>Trend</th>
+            <th>Score</th>
+            <th>Entry</th>
+            <th>SL</th>
+            <th>TP</th>
+            <th>Risk%</th>
+            <th>RR</th>
+            <th>RSI 15m</th>
+            <th>ADX 4H</th>
+            <th>MACD Hist</th>
+            <th>Vol Spike</th>
+            <th>Candle</th>
+            <th>OI Status</th>
+            <th>OI Change%</th>
+            <th>4H EMA Stack</th>
+            <th>4H EMA50 Slope</th>
+            <th>1H EMA Align</th>
+            <th>ADX > 20</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-bullish">
+            <td>2024-03-24 16:35</td>
+            <td><span class="badge-green">BULL</span></td>
+            <td>BOMEUSDT</td>
+            <td style="color:var(--accent);">BULLISH</td>
+            <td>7/9</td>
+            <td>0.014285</td>
+            <td>0.01397</td>
+            <td>0.014915</td>
+            <td>2.21</td>
+            <td>2.0</td>
+            <td>60.9</td>
+            <td>54.5</td>
+            <td>-0.000004</td>
+            <td>✅</td>
+            <td>NO_CONFIRM</td>
+            <td><span class="badge-green">CONFIRM</span></td>
+            <td>0.65</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr class="row-bullish">
+            <td>2024-03-24 16:35</td>
+            <td><span class="badge-green">BULL</span></td>
+            <td>DOGEUSDT</td>
+            <td style="color:var(--accent);">BULLISH</td>
+            <td>7/9</td>
+            <td>0.17066</td>
+            <td>0.16914</td>
+            <td>0.1737</td>
+            <td>0.89</td>
+            <td>2.0</td>
+            <td>61.9</td>
+            <td>28.6</td>
+            <td>-0.000105</td>
+            <td>✅</td>
+            <td>NO_CONFIRM</td>
+            <td><span class="badge-green">CONFIRM</span></td>
+            <td>5.645</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+          </tr>
+          <tr class="row-bearish">
+            <td>2024-03-24 16:38</td>
+            <td><span class="badge-green">BULL</span></td>
+            <td>AEURUSDT</td>
+            <td style="color:var(--red);">BEARISH</td>
+            <td>6/9</td>
+            <td>1.0822</td>
+            <td>1.0829</td>
+            <td>1.0808</td>
+            <td>0.06</td>
+            <td>2.0</td>
+            <td>47.1</td>
+            <td>21.2</td>
+            <td>0.000185</td>
+            <td>❌</td>
+            <td>REJECTION_BEAR</td>
+            <td><span class="badge-orange">NEUTRAL</span></td>
+            <td>0.0</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 </div>
 
-<!-- HOW TO USE -->
 <div class="section">
   <div class="section-title">Recommended Entry Flow</div>
   <div class="card" style="padding: 8px 24px;">
@@ -551,7 +688,6 @@
   </div>
 </div>
 
-<!-- DISCLAIMER -->
 <div class="section">
   <div class="section-title">Disclaimer</div>
   <div class="disclaimer">
@@ -566,7 +702,6 @@
   </div>
 </div>
 
-<!-- REQUIREMENTS -->
 <div class="section">
   <div class="section-title">Requirements</div>
   <div class="card">
